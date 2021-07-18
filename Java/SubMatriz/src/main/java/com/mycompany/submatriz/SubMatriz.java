@@ -13,20 +13,22 @@ public class SubMatriz {
     public static void main(String[] args) {
         System.out.println("Hello...");
         Scanner input=new Scanner(System.in);
-        String a;
+        char a;
         do{
-            int[][] Mm=new SubMatriz().LlenarMatriz(10);
-            int[][] Mp=new SubMatriz().LlenarMatriz(3);
-            new SubMatriz().PrintMatrix(Mm,10);
-            new SubMatriz().PrintMatrix(Mp,3);
-            double con=new SubMatriz().Comparacion(Mm,10,Mp,3);
+            int[][] Mm=LlenarMatriz(10);
+            int[][] Mp=LlenarMatriz(3);
+            PrintMatrix(Mm,10);
+            PrintMatrix(Mp,3);
+            double con=Comparacion(Mm,10,Mp,3);
             System.out.println("Coincidencia="+((con/9)*100)+"%");
             if(con==9){System.out.println("SubMatriz M Contenida en Matriz P");}
             System.out.println("Continuar S/N?");
-            a=input.next();
-        }while(!a.equals("n") || !a.equals("N"));
+            a=Character.toUpperCase(input.next().charAt(0));
+        }while(a!='N');
+        NewClass cls=new NewClass();
+        cls.mensaje("Programa Finalizado...");
     }
-    public int[][] LlenarMatriz(int s){
+    public static int[][] LlenarMatriz(int s){
         int[][] mat=new int[s][s];
         for(int i=0;i<s;i++){
             for(int j=0;j<s;j++){
@@ -35,7 +37,7 @@ public class SubMatriz {
         }
         return mat;
     }
-    public void PrintMatrix(int[][] mat,int s){
+    public static void PrintMatrix(int[][] mat,int s){
         System.out.println("Matriz "+s+"x"+s);
         for(int i=0;i<s;i++){
             for(int j=0;j<s;j++){
@@ -46,7 +48,7 @@ public class SubMatriz {
             System.out.println("");
         }
     }
-    public double Comparacion(int[][] G,int sg,int[][] c,int sc){
+    public static double Comparacion(int[][] G,int sg,int[][] c,int sc){
         int ret=0;
         for(int i=0;i<sg-sc;i++){
             for(int j=0;j<sg-sc;j++){
@@ -55,12 +57,13 @@ public class SubMatriz {
                     for(int tempi=i;tempi<i+sc;tempi++){
                         for(int tempj=j;tempj<j+sc;tempj++){
                             if(G[tempi][tempj]==c[tempi-i][tempj-j]){
-                                System.out.println(G[tempi][tempj]+"/"+c[tempi-i][tempj-j]);temp++;
+                                //System.out.println(G[tempi][tempj]+"/"+c[tempi-i][tempj-j]);
+                                temp++;
                             }
                             else{tempi=tempi+sc;tempj=tempj+sc;}
                         }
                     }
-                    System.out.println("temp="+temp+"|"+j+"|"+i);
+                    //sSystem.out.println("temp="+temp+"|"+j+"|"+i);
                     if(temp>ret){ret=temp;}
                 }
             }
